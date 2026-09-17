@@ -1,0 +1,70 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: alliance-it_postgis
+
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  polygon_api:
+    build:
+      context: ./backend/polygon_api
+
+    container_name: alliance-it_polygon_api
+
+    env_file:
+      - .env
+
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./backend/polygon_api:/app
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+  intersection_service:
+    build:
+      context: ./backend/intersection_service
+
+    container_name: alliance-it_intersection_service
+
+    env_file:
+      - .env
+
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+
+    ports:
+      - "8001:8001"
+
+    volumes:
+      - ./backend/intersection_service:/app
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
