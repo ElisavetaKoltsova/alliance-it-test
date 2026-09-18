@@ -1,0 +1,10 @@
+{
+  "name": "alliance-it-test",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev:frontend",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down"
+  }
+}

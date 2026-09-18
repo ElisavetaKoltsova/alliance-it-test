@@ -1,0 +1,7 @@
+.container {
+    width: 100%;
+    height: min(70vh, 680px);
+    min-height: 500px;
+    overflow: hidden;
+    border-radius: var(--mantine-radius-md);
+}

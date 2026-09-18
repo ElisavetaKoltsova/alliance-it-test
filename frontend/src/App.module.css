@@ -1,0 +1,4 @@
+.coordinatesTextarea {
+    min-height: 180px;
+    resize: vertical;
+}
