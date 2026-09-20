@@ -5,6 +5,9 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
+        "dev:frontend": "npm --prefix frontend run dev",
+        "docker:up": "docker compose up -d",
+        "docker:down": "docker compose down",
         "build": "tsc -b && vite build",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",

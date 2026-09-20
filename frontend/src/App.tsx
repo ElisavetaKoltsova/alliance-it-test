@@ -9,10 +9,6 @@ export const App = () => {
     const [name, setName] = useState('');
     const [coordinates, setCoordinates] = useState<Coordinate[]>([]);
 
-    const handleAddCoordinate = (coordinate: Coordinate) => {
-        setCoordinates((currentCoordinates) => [...currentCoordinates, coordinate]);
-    };
-
     return (
         <Container size="xl" py="xl">
             <Stack gap="xl">
@@ -28,7 +24,7 @@ export const App = () => {
                             name={name}
                             coordinates={coordinates}
                             onNameChange={setName}
-                            onAddCoordinate={handleAddCoordinate}
+                            onCoordinatesChange={setCoordinates}
                         />
                     </Grid.Col>
 

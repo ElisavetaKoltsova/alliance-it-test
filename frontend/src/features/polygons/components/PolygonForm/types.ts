@@ -5,4 +5,6 @@ export interface PolygonFormProps {
     coordinates: Coordinate[];
     onNameChange: (name: string) => void;
     onAddCoordinate: (coordinate: Coordinate) => void;
+    onRemoveCoordinate: (index: number) => void;
+    onClearCoordinates: () => void;
 }
