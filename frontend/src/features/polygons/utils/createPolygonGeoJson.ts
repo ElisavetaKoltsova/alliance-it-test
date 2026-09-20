@@ -1,33 +1,22 @@
-import type {
-    Feature,
-    FeatureCollection,
-    Geometry,
-    LineString,
-    Point,
-    Polygon,
-} from 'geojson';
+import type {Feature, FeatureCollection, Geometry, LineString, Point, Polygon} from 'geojson';
 
 import type {Coordinate} from '../types';
 
 const MIN_LINE_COORDINATES = 2;
 const MIN_POLYGON_COORDINATES = 3;
 
-export const createPolygonGeoJson = (
-    coordinates: Coordinate[],
-): FeatureCollection<Geometry> => {
-    const features: Feature<Geometry>[] = coordinates.map(
-        (coordinate, index): Feature<Point> => ({
-            type: 'Feature',
-            id: `point-${index}`,
-            properties: {
-                index,
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: coordinate,
-            },
-        }),
-    );
+export const createPolygonGeoJson = (coordinates: Coordinate[]): FeatureCollection<Geometry> => {
+    const features: Feature<Geometry>[] = coordinates.map((coordinate, index): Feature<Point> => ({
+        type: 'Feature',
+        id: `point-${index}`,
+        properties: {
+            index,
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: coordinate,
+        },
+    }));
 
     if (coordinates.length >= MIN_LINE_COORDINATES) {
         const lineCoordinates =

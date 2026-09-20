@@ -1,6 +1,7 @@
-import {useEffect, useRef} from 'react';
 import {Map, NavigationControl, setWorkerUrl} from 'maplibre-gl';
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
+import {useEffect, useRef} from 'react';
+
 import type {Coordinate} from '../../types';
 import {
     INITIAL_MAP_CENTER,
@@ -8,10 +9,7 @@ import {
     MAP_CONTROLS_POSITION,
     MAP_STYLE_URL,
 } from './constants';
-import {
-    addPolygonLayers,
-    updatePolygonSource,
-} from './mapLayers';
+import {addPolygonLayers, updatePolygonSource} from './mapLayers';
 
 setWorkerUrl(workerUrl);
 

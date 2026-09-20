@@ -1,4 +1,5 @@
 import type {GeoJSONSource, Map} from 'maplibre-gl';
+
 import type {Coordinate} from '../../types';
 import {createPolygonGeoJson} from '../../utils/createPolygonGeoJson';
 import {
@@ -54,17 +55,12 @@ export const addPolygonLayers = (map: Map) => {
     });
 };
 
-export const updatePolygonSource = (
-    map: Map,
-    coordinates: Coordinate[],
-) => {
+export const updatePolygonSource = (map: Map, coordinates: Coordinate[]) => {
     const source = map.getSource(POLYGON_SOURCE_ID);
 
     if (!source) {
         return;
     }
 
-    (source as GeoJSONSource).setData(
-        createPolygonGeoJson(coordinates),
-    );
+    (source as GeoJSONSource).setData(createPolygonGeoJson(coordinates));
 };
