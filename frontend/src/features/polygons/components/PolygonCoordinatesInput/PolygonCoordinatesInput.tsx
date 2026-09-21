@@ -1,4 +1,4 @@
-import {Button, Group, Stack, Textarea} from '@mantine/core';
+import {Button, Group, Stack, Textarea, Tooltip} from '@mantine/core';
 import {useState} from 'react';
 
 import {COORDINATES_PLACEHOLDER} from '../../constants';
@@ -42,12 +42,16 @@ export const PolygonCoordinatesInput = ({onApply, onClear}: PolygonCoordinatesIn
                 onChange={(event) => setValue(event.currentTarget.value)}
             />
 
-            <Group>
-                <Button onClick={handleApply}>Применить координаты</Button>
+            <Group grow>
+                <Tooltip label="Проверить координаты и отобразить полигон на карте">
+                    <Button onClick={handleApply}>Показать на карте</Button>
+                </Tooltip>
 
-                <Button variant="default" onClick={handleClear} disabled={!value}>
-                    Очистить
-                </Button>
+                <Tooltip label="Очистить координаты и убрать полигон с карты">
+                    <Button variant="default" onClick={handleClear} disabled={!value}>
+                        Очистить
+                    </Button>
+                </Tooltip>
             </Group>
         </Stack>
     );
