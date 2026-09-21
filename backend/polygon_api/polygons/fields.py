@@ -7,6 +7,7 @@ MIN_POLYGON_COORDINATES = 3
 MIN_LATITUDE = -90
 MAX_LATITUDE = 90
 POLYGON_SRID = 4326
+COORDINATE_PRECISION = 12
 
 
 class CoordinatesField(serializers.Field):
@@ -17,8 +18,11 @@ class CoordinatesField(serializers.Field):
         coordinates = geometry.coords[0]
 
         return [
-            list(coordinate)
-            for coordinate in coordinates[:-1]
+            [
+                round(longitude, COORDINATE_PRECISION),
+                round(latitude, COORDINATE_PRECISION),
+            ]
+            for longitude, latitude in coordinates[:-1]
         ]
 
     def to_internal_value(self, coordinates):

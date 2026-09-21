@@ -22,12 +22,23 @@ class PolygonSerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
-        geometry = validated_data['geometry']
+        self._set_antimeridian_flag(validated_data)
+
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        self._set_antimeridian_flag(validated_data)
+
+        return super().update(instance, validated_data)
+
+    def _set_antimeridian_flag(self, validated_data):
+        geometry = validated_data.get('geometry')
+
+        if geometry is None:
+            return
 
         coordinates = list(geometry.coords[0][:-1])
 
-        validated_data['crosses_antimeridian'] = (
-            crosses_antimeridian(coordinates)
+        validated_data['crosses_antimeridian'] = crosses_antimeridian(
+            coordinates,
         )
-
-        return super().create(validated_data)
