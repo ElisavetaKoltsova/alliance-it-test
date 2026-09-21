@@ -1,5 +1,6 @@
 from django.contrib.gis.geos import Polygon as GEOSPolygon
 from rest_framework import serializers
+from .utils.coordinates import normalize_coordinates
 
 
 MIN_POLYGON_COORDINATES = 3
@@ -64,6 +65,15 @@ class CoordinatesField(serializers.Field):
         closed_coordinates = [
             *validated_coordinates,
             validated_coordinates[0],
+        ]
+
+        normalized_coordinates = normalize_coordinates(
+            validated_coordinates,
+        )
+
+        closed_coordinates = [
+            *normalized_coordinates,
+            normalized_coordinates[0],
         ]
 
         return GEOSPolygon(
