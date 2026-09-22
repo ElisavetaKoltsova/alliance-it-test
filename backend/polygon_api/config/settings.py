@@ -134,3 +134,8 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+INTERSECTION_SERVICE_URL = os.environ.get(
+    'INTERSECTION_SERVICE_URL',
+    'http://localhost:8001',
+)

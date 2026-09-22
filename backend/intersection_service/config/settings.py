@@ -134,3 +134,9 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'intersection-service',
+]

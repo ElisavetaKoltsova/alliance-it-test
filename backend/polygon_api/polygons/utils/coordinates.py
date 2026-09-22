@@ -34,3 +34,9 @@ def crosses_antimeridian(coordinates):
             closed_coordinates[1:],
         )
     )
+
+def get_polygon_coordinates(geometry):
+    return [
+        list(coordinate)
+        for coordinate in geometry.coords[0][:-1]
+    ]

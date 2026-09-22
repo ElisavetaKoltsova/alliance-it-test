@@ -32,6 +32,7 @@ services:
     environment:
       POSTGRES_HOST: db
       POSTGRES_PORT: 5432
+      INTERSECTION_SERVICE_URL: http://intersection-service:8001
 
     ports:
       - "8000:8000"
@@ -65,6 +66,11 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+    networks:
+      default:
+        aliases:
+          - intersection-service
 
 volumes:
   postgres_data:

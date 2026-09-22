@@ -2,7 +2,10 @@ from rest_framework import serializers
 
 from .fields import CoordinatesField
 from .models import Polygon
-from .utils.coordinates import crosses_antimeridian
+from .utils.coordinates import (
+    crosses_antimeridian,
+    get_polygon_coordinates,
+)
 
 
 class PolygonSerializer(serializers.ModelSerializer):
@@ -37,7 +40,7 @@ class PolygonSerializer(serializers.ModelSerializer):
         if geometry is None:
             return
 
-        coordinates = list(geometry.coords[0][:-1])
+        coordinates = get_polygon_coordinates(geometry)
 
         validated_data['crosses_antimeridian'] = crosses_antimeridian(
             coordinates,
